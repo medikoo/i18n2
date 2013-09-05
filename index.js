@@ -1,13 +1,13 @@
 'use strict';
 
-var toUint     = require('es5-ext/number/to-uint')
-  , d          = require('es5-ext/object/descriptor')
-  , firstKey   = require('es5-ext/object/first-key')
+var toUint   = require('es5-ext/number/to-uint')
+  , d        = require('es5-ext/object/descriptor')
+  , firstKey = require('es5-ext/object/first-key')
   , Message  = require('./_message')
 
   , isArray = Array.isArray, defineProperties = Object.defineProperties;
 
-module.exports = function () {
+module.exports = function (locale) {
 	var self, resolve;
 	self = function (key/*, inserts*/) {
 		var inserts = arguments[1], template = resolve.call(this, String(key));
@@ -47,7 +47,7 @@ module.exports = function () {
 	};
 
 	return defineProperties(self, {
-		locale: d(null),
+		locale: d(locale),
 		_: d(self),
 		_n: d(function (keyS, keyP, n/*, inserts*/) {
 			var inserts = arguments[3], key = 'n\0' + keyS + '\0' + keyP, template;
