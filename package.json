@@ -15,6 +15,9 @@
     "gettext",
     "internationalization"
   ],
+  "dependencies": {
+    "es5-ext": "git://github.com/medikoo/es5-ext.git"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/medikoo/i18n2/issues"
