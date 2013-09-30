@@ -1,8 +1,8 @@
 'use strict';
 
-var d          = require('es5-ext/object/descriptor')
-  , isCallable = require('es5-ext/object/is-callable')
+var isCallable = require('es5-ext/object/is-callable')
   , compile    = require('es5-ext/string/#/template').compile
+  , d          = require('d/d')
 
   , Message;
 

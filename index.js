@@ -1,8 +1,8 @@
 'use strict';
 
 var toUint   = require('es5-ext/number/to-uint')
-  , d        = require('es5-ext/object/descriptor')
   , firstKey = require('es5-ext/object/first-key')
+  , d        = require('d/d')
   , Message  = require('./_message')
 
   , isArray = Array.isArray, defineProperties = Object.defineProperties;
