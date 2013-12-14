@@ -17,7 +17,8 @@
   ],
   "dependencies": {
     "d": "git://github.com/medikoo/d.git",
-    "es5-ext": "git://github.com/medikoo/es5-ext.git"
+    "es5-ext": "git://github.com/medikoo/es5-ext.git",
+    "es6-template-strings": "git://github.com/medikoo/es6-template-strings.git"
   },
   "license": "MIT",
   "bugs": {

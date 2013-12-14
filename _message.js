@@ -1,23 +1,34 @@
 'use strict';
 
-var isCallable = require('es5-ext/object/is-callable')
-  , compile    = require('es5-ext/string/#/template').compile
-  , d          = require('d/d')
+var mixin          = require('es5-ext/object/mixin')
+  , setPrototypeOf = require('es5-ext/object/set-prototype-of')
+  , d              = require('d/d')
+  , compile        = require('es6-template-strings/compile')
+  , resolve        = require('es6-template-strings/resolve')
 
-  , Message;
+  , forEach = Array.prototype.forEach
+  , Message, tag;
 
-Message = module.exports = function (template, inserts) {
-	var message = compile(template).map(function (str, i) {
-		if (!(i % 2)) return str;
-		return isCallable(inserts[str]) ? inserts[str]() : inserts[str];
+tag = function (literals/*, …substitutions*/) {
+	var args = arguments, result = [];
+	forEach.call(literals, function (value, i) {
+		if (!i) {
+			result.push(value);
+			return;
+		}
+		result.push(args[i], value);
 	});
-	if (!message[0]) message.shift();
-	message.__proto__ = Message.prototype;
-
-	return message;
+	return result;
 };
 
-Message.prototype = Object.create(Array.prototype, {
+Message = module.exports = function (template, inserts) {
+	var message = tag.apply(null, resolve(compile(template), inserts));
+	if (setPrototypeOf) return setPrototypeOf(message, Message.prototype);
+	return mixin(message, Message.prototype);
+};
+
+Message.prototype = [];
+Object.defineProperties(Message.prototype, {
 	constructor: d(Message),
 	toString: d(function () { return this.join(''); })
 });
