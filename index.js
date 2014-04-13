@@ -1,6 +1,6 @@
 'use strict';
 
-var toUint   = require('es5-ext/number/to-uint')
+var toPosInt = require('es5-ext/number/to-pos-integer')
   , firstKey = require('es5-ext/object/first-key')
   , d        = require('d/d')
   , Message  = require('./_message')
@@ -51,8 +51,8 @@ module.exports = function (locale) {
 		_: d(self),
 		_n: d(function (keyS, keyP, n/*, inserts*/) {
 			var inserts = arguments[3], key = 'n\0' + keyS + '\0' + keyP, template;
-			n = toUint(n);
-			template = resolve.call(this, key, toUint(n));
+			n = toPosInt(n);
+			template = resolve.call(this, key, toPosInt(n));
 			if (template === key) template = (n > 1) ? keyP : keyS;
 			if (!inserts) return template;
 			return new Message(template, inserts);
