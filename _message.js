@@ -2,7 +2,7 @@
 
 var mixin          = require('es5-ext/object/mixin')
   , setPrototypeOf = require('es5-ext/object/set-prototype-of')
-  , d              = require('d/d')
+  , d              = require('d')
   , compile        = require('es6-template-strings/compile')
   , resolve        = require('es6-template-strings/resolve')
 

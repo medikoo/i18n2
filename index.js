@@ -2,7 +2,7 @@
 
 var toPosInt = require('es5-ext/number/to-pos-integer')
   , firstKey = require('es5-ext/object/first-key')
-  , d        = require('d/d')
+  , d        = require('d')
   , Message  = require('./_message')
 
   , isArray = Array.isArray, defineProperties = Object.defineProperties;
