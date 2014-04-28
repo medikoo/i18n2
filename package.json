@@ -16,9 +16,9 @@
     "internationalization"
   ],
   "dependencies": {
-    "d": "git://github.com/medikoo/d.git",
-    "es5-ext": "git://github.com/medikoo/es5-ext.git",
-    "es6-template-strings": "git://github.com/medikoo/es6-template-strings.git"
+    "d": "~0.1.1",
+    "es5-ext": "~0.10.2",
+    "es6-template-strings": "0.1.x"
   },
   "license": "MIT",
   "bugs": {
