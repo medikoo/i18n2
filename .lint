@@ -10,3 +10,6 @@ maxlen 80
 ass
 nomen
 plusplus
+
+./parse/source.js
+regexp

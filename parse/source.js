@@ -23,11 +23,11 @@ prepareResult = function (funName, fileContent, result) {
 
 module.exports = function (fileContent) {
 	var context, result = {};
-	context = fileContent.match(/i18n.bind\((.*?)\)/);
+	context = fileContent.match(/i18n\.bind\((.*?)\)/);
 	if (context && context[1]) {
 		context = clearRaw(context[1]);
 	}
-	result.context = context ? context : '';
+	result.context = context || '';
 	result.messages = {};
 	result = prepareResult('_', fileContent, result);
 	result = prepareResult('_n', fileContent, result);
