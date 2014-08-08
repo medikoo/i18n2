@@ -3,25 +3,29 @@
   "version": "0.0.0",
   "description": "Another gettext solution",
   "author": "Mariusz Nowak <medyk@medikoo.com>",
-  "scripts": {
-    "test": "node node_modules/tad/bin/tad"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/medikoo/i18n2.git"
-  },
   "keywords": [
     "i18n",
     "gettext",
     "internationalization"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/i18n2.git"
+  },
   "dependencies": {
     "d": "~0.1.1",
-    "es5-ext": "~0.10.2",
+    "es5-ext": "~0.10.4",
     "es6-template-strings": "0.1.x"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/medikoo/i18n2/issues"
-  }
+  "devDependencies": {
+    "xlint": "~0.2.1",
+    "xlint-jslint-medikoo": "0.1.x",
+    "tad": "0.2.x"
+  },
+  "scripts": {
+    "lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
+    "lint-console": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch",
+    "test": "node node_modules/tad/bin/tad"
+  },
+  "license": "MIT"
 }
