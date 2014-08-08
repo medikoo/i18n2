@@ -15,7 +15,8 @@
   "dependencies": {
     "d": "~0.1.1",
     "es5-ext": "~0.10.4",
-    "es6-template-strings": "0.1.x"
+    "es6-template-strings": "0.1.x",
+		"esniff": "git://github.com/medikoo/esniff.git"
   },
   "devDependencies": {
     "xlint": "~0.2.1",
