@@ -15,15 +15,30 @@ module.exports = function (t) {
 						melo: 'orer'
 					}), ['foo ', 'misa', ' data ', 'orer', ' ', 'misa', '']);
 					a(String(result), "foo misa data orer misa", "Inserts: stringified");
-					a(_("sin"), "sin", "One argument");
-					a(_("sin", "plu", 1), "sin", "1");
-					a(_("sin", "plu", 2), "plu", "2");
-					a(_("sin", "plu", 20), "plu", "n");
+				},
+				"N": {
+					"": function (a) {
+						a(_("sin"), "sin", "One argument");
+						a(_("sin", "plu", 1), "sin", "1");
+						a(_("sin", "plu", 2), "plu", "2");
+						a(_("sin", "plu", 20), "plu", "n");
 
-					a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
-						['sin ', 'bar', ''], "Inserts: Singular");
-					a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
-						['plu ', 'bar', ''], "Inserts: Plural");
+						a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
+							['sin ', 'bar', ''], "Inserts: Singular");
+						a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
+							['plu ', 'bar', ''], "Inserts: Plural");
+					},
+					"Context": function (a) {
+						a(_.call('bar', "sin"), "sin", "One argument");
+						a(_.call('bar', "sin", "plu", 1), "sin", "1");
+						a(_.call('bar', "sin", "plu", 2), "plu", "2");
+						a(_.call('bar', "sin", "plu", 20), "plu", "n");
+
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
+							{ foo: 'bar' }), ['sin ', 'bar', ''], "Inserts: Singular");
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
+							{ foo: 'bar' }), ['plu ', 'bar', ''], "Inserts: Plural");
+					}
 				},
 				"Context": function (a) {
 					var result;
@@ -33,15 +48,6 @@ module.exports = function (t) {
 						melo: 'orer'
 					}), ['foo ', 'misa', ' data ', 'orer', ' ', 'misa', '']);
 					a(String(result), "foo misa data orer misa", "Inserts: stringified");
-					a(_.call('bar', "sin"), "sin", "One argument");
-					a(_.call('bar', "sin", "plu", 1), "sin", "1");
-					a(_.call('bar', "sin", "plu", 2), "plu", "2");
-					a(_.call('bar', "sin", "plu", 20), "plu", "n");
-
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
-						{ foo: 'bar' }), ['sin ', 'bar', ''], "Inserts: Singular");
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
-						{ foo: 'bar' }), ['plu ', 'bar', ''], "Inserts: Plural");
 				}
 			};
 		},
@@ -63,17 +69,32 @@ module.exports = function (t) {
 						melo: 'orer'
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
 					a(_("none e"), "none e", "Not in locale");
-					a(_("sin"), "sin", "One argument");
-					a(_("sin", "plu", 1), "foo", "1");
-					a(_("sin", "plu", 2), "marko", "2");
-					a(_("sin", "plu", 20), "marko", "n");
+				},
+				"N": {
+					"": function (a) {
+						a(_("sin"), "sin", "One argument");
+						a(_("sin", "plu", 1), "foo", "1");
+						a(_("sin", "plu", 2), "marko", "2");
+						a(_("sin", "plu", 20), "marko", "n");
 
-					a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
-						['numi ', 'bar', ''], "Inserts: Singular");
-					a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
-						['', 'bar', ' was'], "Inserts: Plural");
+						a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
+							['numi ', 'bar', ''], "Inserts: Singular");
+						a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
+							['', 'bar', ' was'], "Inserts: Plural");
 
-					a.deep(_('marko', 'elo', 2, ''), 'fisas', "String resolved");
+						a.deep(_('marko', 'elo', 2, ''), 'fisas', "String resolved");
+					},
+					"Context": function (a) {
+						a(_.call('bar', "sin"), "sin", "One argument");
+						a(_.call('bar', "sin", "plu", 1), "foo", "1");
+						a(_.call('bar', "sin", "plu", 2), "marko", "2");
+						a(_.call('bar', "sin", "plu", 20), "marko", "n");
+
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
+							{ foo: 'bar' }), ['numi ', 'bar', ''], "Inserts: Singular");
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
+							{ foo: 'bar' }), ['', 'bar', ' was'], "Inserts: Plural");
+					}
 				},
 				"Context": function (a) {
 					a(_.call('bar', "foo"), "elo", "Regular");
@@ -81,15 +102,6 @@ module.exports = function (t) {
 						bar: 'misa',
 						melo: 'orer'
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
-					a(_.call('bar', "sin"), "sin", "One argument");
-					a(_.call('bar', "sin", "plu", 1), "foo", "1");
-					a(_.call('bar', "sin", "plu", 2), "marko", "2");
-					a(_.call('bar', "sin", "plu", 20), "marko", "n");
-
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
-						{ foo: 'bar' }), ['numi ', 'bar', ''], "Inserts: Singular");
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
-						{ foo: 'bar' }), ['', 'bar', ' was'], "Inserts: Plural");
 				}
 			};
 		},
@@ -112,17 +124,32 @@ module.exports = function (t) {
 						melo: 'orer'
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
 					a(_("none e"), "none e", "Not in locale");
-					a(_("sin"), "sin", "One argument");
-					a(_("sin", "plu", 1), "foo", "1");
-					a(_("sin", "plu", 2), "marko", "2");
-					a(_("sin", "plu", 20), "marko", "n");
+				},
+				"N": {
+					"": function (a) {
+						a(_("sin"), "sin", "One argument");
+						a(_("sin", "plu", 1), "foo", "1");
+						a(_("sin", "plu", 2), "marko", "2");
+						a(_("sin", "plu", 20), "marko", "n");
 
-					a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
-						['numi ', 'bar', ''], "Inserts: Singular");
-					a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
-						['', 'bar', ' was'], "Inserts: Plural");
+						a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
+							['numi ', 'bar', ''], "Inserts: Singular");
+						a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
+							['', 'bar', ' was'], "Inserts: Plural");
 
-					a.deep(_('marko', 'elo', 2), 'fisas', "String resolved");
+						a.deep(_('marko', 'elo', 2), 'fisas', "String resolved");
+					},
+					"Context": function (a) {
+						a(_.call('bar', "sin"), "sin", "One argument");
+						a(_.call('bar', "sin", "plu", 1), "foo", "1");
+						a(_.call('bar', "sin", "plu", 2), "marko", "2");
+						a(_.call('bar', "sin", "plu", 20), "marko", "n");
+
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
+							{ foo: 'bar' }), ['numi ', 'bar', ''], "Inserts: Singular");
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
+							{ foo: 'bar' }), ['', 'bar', ' was'], "Inserts: Plural");
+					}
 				},
 				"Context": function (a) {
 					a(_.call('bar', "foo"), "elo", "Regular");
@@ -130,15 +157,6 @@ module.exports = function (t) {
 						bar: 'misa',
 						melo: 'orer'
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
-					a(_.call('bar', "sin"), "sin", "One argument");
-					a(_.call('bar', "sin", "plu", 1), "foo", "1");
-					a(_.call('bar', "sin", "plu", 2), "marko", "2");
-					a(_.call('bar', "sin", "plu", 20), "marko", "n");
-
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
-						{ foo: 'bar' }), ['numi ', 'bar', ''], "Inserts: Singular");
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
-						{ foo: 'bar' }), ['', 'bar', ' was'], "Inserts: Plural");
 				}
 			};
 		},
@@ -165,17 +183,32 @@ module.exports = function (t) {
 						melo: 'orer'
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
 					a(_("none e"), "none e", "Not in locale");
-					a(_("sin"), "sin", "One argument");
-					a(_("sin", "plu", 1), "foo", "1");
-					a(_("sin", "plu", 2), "marko", "2");
-					a(_("sin", "plu", 20), "marko", "n");
+				},
+				"N": {
+					"": function (a) {
+						a(_("sin"), "sin", "One argument");
+						a(_("sin", "plu", 1), "foo", "1");
+						a(_("sin", "plu", 2), "marko", "2");
+						a(_("sin", "plu", 20), "marko", "n");
 
-					a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
-						['numi ', 'bar', ''], "Inserts: Singular");
-					a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
-						['', 'bar', ' was'], "Inserts: Plural");
+						a.deep(_("sin ${foo}", "plu ${foo}", 1, { foo: 'bar' }),
+							['numi ', 'bar', ''], "Inserts: Singular");
+						a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
+							['', 'bar', ' was'], "Inserts: Plural");
 
-					a.deep(_('marko', 'elo', 2), 'fisas', "String resolved");
+						a.deep(_('marko', 'elo', 2), 'fisas', "String resolved");
+					},
+					"Context": function (a) {
+						a(_.call('bar', "sin"), "sin", "One argument");
+						a(_.call('bar', "sin", "plu", 1), "fofo", "1");
+						a(_.call('bar', "sin", "plu", 2), "efe", "2");
+						a(_.call('bar', "sin", "plu", 20), "efe", "n");
+
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
+							{ foo: 'bar' }), ['numid ', 'bar', ''], "Inserts: Singular");
+						a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
+							{ foo: 'bar' }), ['', 'bar', ' wasdd'], "Inserts: Plural");
+					}
 				},
 				"Context": function (a) {
 					a(_.call('bar', "foo"), "marko", "Regular");
@@ -183,15 +216,6 @@ module.exports = function (t) {
 						bar: 'misa',
 						melo: 'orer'
 					}), ['marek ', 'orer', ' sd ', 'misa', ' habla'], "Inserts");
-					a(_.call('bar', "sin"), "sin", "One argument");
-					a(_.call('bar', "sin", "plu", 1), "fofo", "1");
-					a(_.call('bar', "sin", "plu", 2), "efe", "2");
-					a(_.call('bar', "sin", "plu", 20), "efe", "n");
-
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 1,
-						{ foo: 'bar' }), ['numid ', 'bar', ''], "Inserts: Singular");
-					a.deep(_.call('bar', "sin ${foo}", "plu ${foo}", 2,
-						{ foo: 'bar' }), ['', 'bar', ' wasdd'], "Inserts: Plural");
 				}
 			};
 		}
