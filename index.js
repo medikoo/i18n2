@@ -9,8 +9,20 @@ var toPosInt = require('es5-ext/number/to-pos-integer')
 
 module.exports = function (locale) {
 	var self, resolve;
-	self = function (key/*, inserts*/) {
-		var inserts = arguments[1], template = resolve.call(this, String(key));
+	self = function (keyS/*, keyP, n, inserts*/) {
+		var inserts, template, keyP, key, n;
+		keyS = String(keyS);
+		if (arguments.length > 2) { //plural
+			inserts = arguments[3];
+			keyP = String(arguments[1]);
+			key = 'n\0' + keyS + '\0' + keyP;
+			n = toPosInt(arguments[2]);
+			template = resolve.call(this, key, n);
+			if (template === key) template = (n > 1) ? keyP : keyS;
+		} else {
+			inserts = arguments[1];
+			template = resolve.call(this, keyS);
+		}
 		if (!inserts) return template;
 		return new Message(template, inserts);
 	};
@@ -48,14 +60,6 @@ module.exports = function (locale) {
 
 	return defineProperties(self, {
 		locale: d(locale),
-		_: d(self),
-		_n: d(function (keyS, keyP, n/*, inserts*/) {
-			var inserts = arguments[3], key = 'n\0' + keyS + '\0' + keyP, template;
-			n = toPosInt(n);
-			template = resolve.call(this, key, toPosInt(n));
-			if (template === key) template = (n > 1) ? keyP : keyS;
-			if (!inserts) return template;
-			return new Message(template, inserts);
-		})
+		_: d(self)
 	});
 };
