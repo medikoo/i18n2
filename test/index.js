@@ -16,7 +16,7 @@ module.exports = function (t) {
 					}), ['foo ', 'misa', ' data ', 'orer', ' ', 'misa', '']);
 					a(String(result), "foo misa data orer misa", "Inserts: stringified");
 				},
-				"N": {
+				N: {
 					"": function (a) {
 						a(_("sin"), "sin", "One argument");
 						a(_("sin", "plu", 1), "sin", "1");
@@ -28,7 +28,7 @@ module.exports = function (t) {
 						a.deep(_("sin ${foo}", "plu ${foo}", 2, { foo: 'bar' }),
 							['plu ', 'bar', ''], "Inserts: Plural");
 					},
-					"Context": function (a) {
+					Context: function (a) {
 						a(_.call('bar', "sin"), "sin", "One argument");
 						a(_.call('bar', "sin", "plu", 1), "sin", "1");
 						a(_.call('bar', "sin", "plu", 2), "plu", "2");
@@ -40,7 +40,7 @@ module.exports = function (t) {
 							{ foo: 'bar' }), ['plu ', 'bar', ''], "Inserts: Plural");
 					}
 				},
-				"Context": function (a) {
+				Context: function (a) {
 					var result;
 					a(_.call('bar', "foo"), "foo", "Regular");
 					a.deep(result = _.call('bar', "foo ${bar} data ${melo} ${bar}", {
@@ -51,9 +51,9 @@ module.exports = function (t) {
 				}
 			};
 		},
-		"Locale": function () {
+		Locale: function () {
 			_.locale = {
-				'foo': 'elo',
+				foo: 'elo',
 				"foo ${bar} data ${melo} ${bar}": 'marek ${melo} sd ${bar}',
 				"n\0sin\0plu": ['foo', 'marko'],
 				"n\0sin ${foo}\0plu ${foo}": function (n) {
@@ -70,7 +70,7 @@ module.exports = function (t) {
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
 					a(_("none e"), "none e", "Not in locale");
 				},
-				"N": {
+				N: {
 					"": function (a) {
 						a(_("sin"), "sin", "One argument");
 						a(_("sin", "plu", 1), "foo", "1");
@@ -84,7 +84,7 @@ module.exports = function (t) {
 
 						a.deep(_('marko', 'elo', 2, ''), 'fisas', "String resolved");
 					},
-					"Context": function (a) {
+					Context: function (a) {
 						a(_.call('bar', "sin"), "sin", "One argument");
 						a(_.call('bar', "sin", "plu", 1), "foo", "1");
 						a(_.call('bar', "sin", "plu", 2), "marko", "2");
@@ -96,7 +96,7 @@ module.exports = function (t) {
 							{ foo: 'bar' }), ['', 'bar', ' was'], "Inserts: Plural");
 					}
 				},
-				"Context": function (a) {
+				Context: function (a) {
 					a(_.call('bar', "foo"), "elo", "Regular");
 					a.deep(_.call('bar', "foo ${bar} data ${melo} ${bar}", {
 						bar: 'misa',
@@ -107,7 +107,7 @@ module.exports = function (t) {
 		},
 		"Default context": function () {
 			_.locale = {
-				'foo': { default: 'elo' },
+				foo: { default: 'elo' },
 				"foo ${bar} data ${melo} ${bar}":
 					{ default: 'marek ${melo} sd ${bar}' },
 				"n\0sin\0plu": { default: ['foo', 'marko'] },
@@ -125,7 +125,7 @@ module.exports = function (t) {
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
 					a(_("none e"), "none e", "Not in locale");
 				},
-				"N": {
+				N: {
 					"": function (a) {
 						a(_("sin"), "sin", "One argument");
 						a(_("sin", "plu", 1), "foo", "1");
@@ -139,7 +139,7 @@ module.exports = function (t) {
 
 						a.deep(_('marko', 'elo', 2), 'fisas', "String resolved");
 					},
-					"Context": function (a) {
+					Context: function (a) {
 						a(_.call('bar', "sin"), "sin", "One argument");
 						a(_.call('bar', "sin", "plu", 1), "foo", "1");
 						a(_.call('bar', "sin", "plu", 2), "marko", "2");
@@ -151,7 +151,7 @@ module.exports = function (t) {
 							{ foo: 'bar' }), ['', 'bar', ' was'], "Inserts: Plural");
 					}
 				},
-				"Context": function (a) {
+				Context: function (a) {
 					a(_.call('bar', "foo"), "elo", "Regular");
 					a.deep(_.call('bar', "foo ${bar} data ${melo} ${bar}", {
 						bar: 'misa',
@@ -162,7 +162,7 @@ module.exports = function (t) {
 		},
 		"Special context": function () {
 			_.locale = {
-				'foo': { default: 'elo', bar: 'marko' },
+				foo: { default: 'elo', bar: 'marko' },
 				"foo ${bar} data ${melo} ${bar}": {
 					default: 'marek ${melo} sd ${bar}',
 					bar: 'marek ${melo} sd ${bar} habla'
@@ -184,7 +184,7 @@ module.exports = function (t) {
 					}), ['marek ', 'orer', ' sd ', 'misa', ''], "Inserts");
 					a(_("none e"), "none e", "Not in locale");
 				},
-				"N": {
+				N: {
 					"": function (a) {
 						a(_("sin"), "sin", "One argument");
 						a(_("sin", "plu", 1), "foo", "1");
@@ -198,7 +198,7 @@ module.exports = function (t) {
 
 						a.deep(_('marko', 'elo', 2), 'fisas', "String resolved");
 					},
-					"Context": function (a) {
+					Context: function (a) {
 						a(_.call('bar', "sin"), "sin", "One argument");
 						a(_.call('bar', "sin", "plu", 1), "fofo", "1");
 						a(_.call('bar', "sin", "plu", 2), "efe", "2");
@@ -210,7 +210,7 @@ module.exports = function (t) {
 							{ foo: 'bar' }), ['', 'bar', ' wasdd'], "Inserts: Plural");
 					}
 				},
-				"Context": function (a) {
+				Context: function (a) {
 					a(_.call('bar', "foo"), "marko", "Regular");
 					a.deep(_.call('bar', "foo ${bar} data ${melo} ${bar}", {
 						bar: 'misa',
