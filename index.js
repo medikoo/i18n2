@@ -2,6 +2,7 @@
 
 var toPosInt = require('es5-ext/number/to-pos-integer')
   , firstKey = require('es5-ext/object/first-key')
+  , value    = require('es5-ext/object/valid-value')
   , d        = require('d')
   , Message  = require('./_message')
 
@@ -11,10 +12,10 @@ module.exports = function (locale) {
 	var self, resolve;
 	self = function (keyS/*, keyP, n, inserts*/) {
 		var inserts, template, keyP, key, n;
-		keyS = String(keyS);
+		keyS = String(value(keyS)).trim();
 		if (arguments.length > 2) { // Plural
 			inserts = arguments[3];
-			keyP = String(arguments[1]);
+			keyP = String(value(arguments[1])).trim();
 			key = 'n\0' + keyS + '\0' + keyP;
 			n = toPosInt(arguments[2]);
 			template = resolve.call(this, key, n);
