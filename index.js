@@ -12,7 +12,7 @@ module.exports = function (locale) {
 	self = function (keyS/*, keyP, n, inserts*/) {
 		var inserts, template, keyP, key, n;
 		keyS = String(keyS);
-		if (arguments.length > 2) { //plural
+		if (arguments.length > 2) { // Plural
 			inserts = arguments[3];
 			keyP = String(arguments[1]);
 			key = 'n\0' + keyS + '\0' + keyP;
