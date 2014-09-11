@@ -14,12 +14,13 @@ module.exports = function (locale) {
 		var inserts, template, keyP, key, n;
 		keyS = String(value(keyS)).trim();
 		if (arguments.length > 2) { // Plural
-			inserts = arguments[3];
+			inserts = Object(arguments[3]);
 			keyP = String(value(arguments[1])).trim();
 			key = 'n\0' + keyS + '\0' + keyP;
 			n = toPosInt(arguments[2]);
 			template = resolve.call(this, key, n);
 			if (template === key) template = (n > 1) ? keyP : keyS;
+			inserts.n = n;
 		} else {
 			inserts = arguments[1];
 			template = resolve.call(this, keyS);
