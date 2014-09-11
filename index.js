@@ -11,7 +11,7 @@ var toPosInt = require('es5-ext/number/to-pos-integer')
 module.exports = function (locale) {
 	var self, resolve;
 	self = function (keyS/*, keyP, n, inserts*/) {
-		var inserts, template, keyP, key, n;
+		var inserts, template, keyP, key, n, msg;
 		keyS = String(value(keyS)).trim();
 		if (arguments.length > 2) { // Plural
 			inserts = Object(arguments[3]);
@@ -26,7 +26,9 @@ module.exports = function (locale) {
 			template = resolve.call(this, keyS);
 		}
 		if (!inserts) return template;
-		return new Message(template, inserts);
+		msg = new Message(template, inserts);
+		if (msg.length === 1) return msg[0];
+		return msg;
 	};
 	resolve = function (key, n) {
 		var locale = self.locale, context, template, isMulti;
