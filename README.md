@@ -12,8 +12,11 @@ Once initialized, translation engine should be used across your application as a
 ```javascript
 
 var I18n = require('i18n2');
-var i18n = new I18n(locale); // locale (map of translations) is optional and can be provided at later step
 
+// locale (map of translations) is optional and can be provided at later step
+var i18n = new I18n(locale);
+
+// By convention name for gettext translator function is `_`
 var _ = i18n;
 ...
 _("Hello World"); // Witaj Świecie!
@@ -21,7 +24,7 @@ _("Hello World"); // Witaj Świecie!
 
 #### Contexts
 
-Different contexts maybe assigned:
+Different contexts can be assigned:
 
 ```javascript
 var _ = i18n.bind('admin');
@@ -33,7 +36,7 @@ _("Hello World!"); // Admin: Witaj Świecie
 
 #### Configuration of messages
 
-##### Singular message: \_(msg[, inserts]) 
+##### Singular message: `_(msg[, inserts])`
 
 Singular message can be plain:
 
@@ -54,14 +57,14 @@ Substitutions syntax follows [ECMAScript's 6 template strings](http://www.2ality
 
 ##### Singular + plural message: _(singularMsg, pluralMsg, count[, inserts])
 
-Singular and plural key is provided, and count to be used needs to passed:
+Singular and plural key, plus resolved count needs to be provided:
 
 ```javascript
 _("${n} cat", "${n} cats", 1); // 1 kot
 _("${n} cat", "${n} cats", 3); // 3 koty
 _("${n} cat", "${n} cats", 5); // 5 kotów
 ```
-Same way as in case of singular messages inserts can be provided as fourth argument
+Same way as in case of singular messages, inserts can be provided as fourth argument
 
 #### Configuration of locale map
 
