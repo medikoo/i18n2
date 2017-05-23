@@ -3,7 +3,7 @@
 ## Another gettext solution for JavaScript
 ### Installation
 
-	$ npm install medikoo/i18n2
+	$ npm install i18n2
 
 ### Usage
 
