@@ -35,7 +35,7 @@ module.exports = function (initDb) {
 	};
 	// eslint-disable-next-line max-statements
 	resolve = function (key, pluralCount) {
-		var db = self.locale, context, template, isMulti;
+		var db = self.db, context, template, isMulti;
 		if (!db) return key;
 		db = db[key];
 		if (!isValue(db)) return key;
@@ -68,7 +68,7 @@ module.exports = function (initDb) {
 	};
 
 	return defineProperties(self, {
-		locale: d(initDb),
+		db: d(initDb),
 		_: d(self)
 	});
 };

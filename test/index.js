@@ -5,7 +5,7 @@ module.exports = function (t) {
 
 	return {
 		"No data": function () {
-			_.locale = null;
+			_.db = null;
 			return {
 				"": function (a) {
 					var result;
@@ -69,8 +69,8 @@ module.exports = function (t) {
 				}
 			};
 		},
-		"Locale": function () {
-			_.locale = {
+		"db": function () {
+			_.db = {
 				"foo": "elo",
 				"foo ${bar} data ${melo} ${bar}": "marek ${melo} sd ${bar}",
 				"n\0sin\0plu": ["foo", "marko"],
@@ -90,7 +90,7 @@ module.exports = function (t) {
 						["marek ", "orer", " sd ", "misa", ""],
 						"Inserts"
 					);
-					a(_("none e"), "none e", "Not in locale");
+					a(_("none e"), "none e", "Not in db");
 				},
 				"N": {
 					"": function (a) {
@@ -144,7 +144,7 @@ module.exports = function (t) {
 			};
 		},
 		"Default context": function () {
-			_.locale = {
+			_.db = {
 				"foo": { default: "elo" },
 				"foo ${bar} data ${melo} ${bar}": { default: "marek ${melo} sd ${bar}" },
 				"n\0sin\0plu": { default: ["foo", "marko"] },
@@ -166,7 +166,7 @@ module.exports = function (t) {
 						["marek ", "orer", " sd ", "misa", ""],
 						"Inserts"
 					);
-					a(_("none e"), "none e", "Not in locale");
+					a(_("none e"), "none e", "Not in db");
 				},
 				"N": {
 					"": function (a) {
@@ -220,7 +220,7 @@ module.exports = function (t) {
 			};
 		},
 		"Special context": function () {
-			_.locale = {
+			_.db = {
 				"foo": { default: "elo", bar: "marko" },
 				"foo ${bar} data ${melo} ${bar}": {
 					default: "marek ${melo} sd ${bar}",
@@ -248,7 +248,7 @@ module.exports = function (t) {
 						["marek ", "orer", " sd ", "misa", ""],
 						"Inserts"
 					);
-					a(_("none e"), "none e", "Not in locale");
+					a(_("none e"), "none e", "Not in db");
 				},
 				"N": {
 					"": function (a) {
