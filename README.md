@@ -1,6 +1,5 @@
 [![Build status][circleci-image]][circleci-url]
 [![Build status][appveyor-image]][appveyor-url]
-[![Tests coverage][codecov-image]][codecov-url]
 ![Transpilation status][transpilation-image]
 [![npm version][npm-image]][npm-url]
 
