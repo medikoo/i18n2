@@ -9,7 +9,7 @@ var toPosInt = require("es5-ext/number/to-pos-integer")
 
 var isArray = Array.isArray, defineProperties = Object.defineProperties;
 
-module.exports = function (locale) {
+module.exports = function (initDb) {
 	var self, resolve;
 	self = function (keyS/*, keyP, n, inserts*/) {
 		var inserts, template, keyP, key, pluralCount, msg;
@@ -68,7 +68,7 @@ module.exports = function (locale) {
 	};
 
 	return defineProperties(self, {
-		locale: d(locale),
+		locale: d(initDb),
 		_: d(self)
 	});
 };
