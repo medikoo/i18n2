@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "d": "1",
-    "es5-ext": "^0.10.21",
+    "es5-ext": "^0.10.35",
     "es6-template-strings": "^2.0.1"
   },
   "devDependencies": {
