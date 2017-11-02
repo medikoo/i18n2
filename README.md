@@ -13,8 +13,8 @@ Once initialized, translation engine should be used across your application as a
 
 var I18n = require('i18n2');
 
-// locale (map of translations) is optional and can be provided at later step
-var i18n = new I18n(locale);
+// db (map of translations) is optional and can be provided at later step
+var i18n = new I18n(db);
 
 // By convention name for gettext translator function is `_`
 var _ = i18n;
@@ -66,12 +66,12 @@ _("${n} cat", "${n} cats", 5); // 5 kotów
 ```
 Same way as in case of singular messages, inserts can be provided as fourth argument
 
-#### Configuration of locale map
+#### Configuration of translations database
 
 Configuration with no contexts (`default` context is assumed):
 
 ```javascript
-var locale = {
+var db = {
   "Hello World": "Witaj Świecie!"
 };
 ```
@@ -80,7 +80,7 @@ With contexts
 
 
 ```javascript
-var locale = {
+var db = {
   "Hello World": {
     default: "Witaj Świecie!",
     admin: "Admin: Witaj Świecie!"
@@ -97,7 +97,7 @@ There are two ways of providing translations
 ###### with Array of options
 
 ```javascript
-var locale = {
+var db = {
   "\0${n} cat\0${n} cats": [
     "${n} kot",  // 1
     "${n} koty",,, // 2,3,4
@@ -111,7 +111,7 @@ var locale = {
 In some languages (like Polish) resolving plurals is more tricky, the definite way can only be achieved with custom function:
 
 ```javascript
-var locale = {
+var db = {
   "\0${n} cat\0${n} cats": function (n) {
     if (n === 1) return "${n} kot";
     n = n % 100;
