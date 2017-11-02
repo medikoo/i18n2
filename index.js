@@ -2,6 +2,7 @@
 
 var toPosInt = require("es5-ext/number/to-pos-integer")
   , firstKey = require("es5-ext/object/first-key")
+  , isValue  = require("es5-ext/object/is-value")
   , value    = require("es5-ext/object/valid-value")
   , d        = require("d")
   , Message  = require("./_message");
@@ -11,17 +12,18 @@ var isArray = Array.isArray, defineProperties = Object.defineProperties;
 module.exports = function (locale) {
 	var self, resolve;
 	self = function (keyS/*, keyP, n, inserts*/) {
-		var inserts, template, keyP, key, n, msg;
+		var inserts, template, keyP, key, pluralCount, msg;
 		keyS = String(value(keyS)).trim();
 		if (arguments.length > 2) {
 			// Plural
 			inserts = Object(arguments[3]);
 			keyP = String(value(arguments[1])).trim();
 			key = "n\0" + keyS + "\0" + keyP;
-			n = toPosInt(arguments[2]);
-			template = resolve.call(this, key, n);
-			if (template === key) template = n > 1 ? keyP : keyS;
-			inserts.n = n;
+			pluralCount = toPosInt(arguments[2]);
+			template = resolve.call(this, key, pluralCount);
+			if (template === key) template = pluralCount > 1 ? keyP : keyS;
+			// eslint-disable-next-line id-length
+			inserts.n = pluralCount;
 		} else {
 			inserts = arguments[1];
 			template = resolve.call(this, keyS);
@@ -31,33 +33,35 @@ module.exports = function (locale) {
 		if (msg.length === 1) return msg[0];
 		return msg;
 	};
-	resolve = function (key, n) {
-		var locale = self.locale, context, template, isMulti;
-		if (!locale) return key;
-		if ((locale = locale[key]) == null) return key;
-		if (typeof locale === "string") return locale;
-		isMulti = n != null;
-		if (isMulti && typeof locale === "function") return locale(n);
-		if (!isMulti || !isArray(locale)) {
-			context = this == null || this === self ? "default" : this;
-			if (locale[context] != null) {
-				template = locale[context];
-			} else if (locale.default != null) {
-				template = locale.default;
+	// eslint-disable-next-line max-statements
+	resolve = function (key, pluralCount) {
+		var db = self.locale, context, template, isMulti;
+		if (!db) return key;
+		db = db[key];
+		if (!isValue(db)) return key;
+		if (typeof db === "string") return db;
+		isMulti = isValue(pluralCount);
+		if (isMulti && typeof db === "function") return db(pluralCount);
+		if (!isMulti || !isArray(db)) {
+			context = !isValue(this) || this === self ? "default" : this;
+			if (isValue(db[context])) {
+				template = db[context];
+			} else if (isValue(db.default)) {
+				template = db.default;
 			} else {
-				context = firstKey(locale);
-				if (context == null) return key;
-				template = locale[context];
+				context = firstKey(db);
+				if (!isValue(context)) return key;
+				template = db[context];
 			}
 		} else {
-			template = locale;
+			template = db;
 		}
 		if (!isMulti) return String(template);
-		if (typeof template === "function") return template(n);
+		if (typeof template === "function") return template(pluralCount);
 		if (isArray(template)) {
-			if (n) --n;
-			while (n && template[n] == null) --n;
-			if (template[n] != null) return template[n];
+			if (pluralCount) --pluralCount;
+			while (pluralCount && !isValue(template[pluralCount])) --pluralCount;
+			if (isValue(template[pluralCount])) return template[pluralCount];
 			return key;
 		}
 		return String(template);
