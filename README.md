@@ -1,3 +1,9 @@
+[![Build status][circleci-image]][circleci-url]
+[![Build status][appveyor-image]][appveyor-url]
+[![Tests coverage][codecov-image]][codecov-url]
+![Transpilation status][transpilation-image]
+[![npm version][npm-image]][npm-url]
+
 # i18n2
 
 ## Another gettext solution for JavaScript
@@ -131,3 +137,10 @@ var db = {
 
 	$ npm test
 
+[circleci-image]: https://img.shields.io/circleci/project/github/medikoo/i18n2.svg
+[circleci-url]: https://circleci.com/gh/medikoo/i18n2
+[appveyor-image]: https://img.shields.io/appveyor/ci/medikoo/i18n2.svg
+[appveyor-url]: https://ci.appveyor.com/project/medikoo/i18n2
+[transpilation-image]: https://img.shields.io/badge/transpilation-free-brightgreen.svg
+[npm-image]: https://img.shields.io/npm/v/i18n2.svg
+[npm-url]: https://www.npmjs.com/package/i18n2
