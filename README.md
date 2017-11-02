@@ -20,12 +20,18 @@ Once initialized, translation engine should be used across your application as a
 var I18n = require('i18n2');
 
 // db (map of translations) is optional and can be provided at later step
-var i18n = new I18n(db);
+var i18n = new I18n(polishLangDb);
 
 // By convention name for gettext translator function is `_`
 var _ = i18n;
-...
-_("Hello World"); // Witaj Świecie!
+
+_("Hello World!"); // Witaj Świecie!
+
+// We can switch database on the go
+_.db = italianLangDb
+
+_("Hello World!"); // Ciao World
+
 ```
 
 #### Contexts
