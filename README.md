@@ -138,7 +138,7 @@ var db = {
 };
 ```
 
-### Tests [![Build Status](https://travis-ci.org/medikoo/i18n2.svg)](https://travis-ci.org/medikoo/i18n2)
+### Tests
 
 	$ npm test
 
